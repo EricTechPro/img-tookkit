@@ -3,7 +3,6 @@
 **Version:** 1.0
 **Date:** October 1, 2025
 **Author:** Eric Tech
-**Client:** Superyacht Publications Limited
 **Development Partner:** Serenity Digital (API Development)
 
 ---
