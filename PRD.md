@@ -1,9 +1,10 @@
-# Product Requirements Document: AI WhatsApp Assistant for Superyacht Services Guide (SSG)
+# Product Requirements Document: AI WhatsApp Assistant for Superyacht Services
 
 **Version:** 1.0
+
 **Date:** October 1, 2025
+
 **Author:** Eric Tech
-**Development Partner:** Serenity Digital (API Development)
 
 ---
 
