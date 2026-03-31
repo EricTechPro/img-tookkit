@@ -60,7 +60,7 @@ python .claude/skills/nanobanana-ultimate/scripts/generate_image.py \
   output.jpg --preset blog
 ```
 
-Options: `--model flash|pro`, `--aspect 16:9`, `--size 2K`, `--preset blog|youtube|social|story|og|banner`
+Options: `--model flash|pro`, `--aspect 16:9`, `--size 2K`, `--preset blog|youtube|social|story|og|banner`, `--character clawd`
 
 ### Edit (Modify Existing Image)
 ```bash

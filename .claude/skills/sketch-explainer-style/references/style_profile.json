@@ -1,0 +1,42 @@
+{
+  "style_name": "sketch-explainer",
+  "style_summary": "A hand-drawn, line-art illustration style with cross-hatching for shading, used for clear, diagrammatic explanations. The visual language is primarily monochromatic but can feature muted, watercolor-like color sections to organize information, with a focus on icons and flow.",
+  "color_palette": {
+    "dominant_colors": [
+      "#000000",
+      "#ffffff"
+    ],
+    "accent_colors": [
+      "#a9cce3",
+      "#f9e79f",
+      "#a3e4d7",
+      "#d7bde2",
+      "#edbb99",
+      "#8e44ad"
+    ],
+    "saturation": "low",
+    "warmth": "neutral"
+  },
+  "composition": {
+    "layout": "diagrammatic",
+    "whitespace": "moderate",
+    "density": "balanced"
+  },
+  "mood": "informative",
+  "rendering_style": "hand-drawn sketch with cross-hatching",
+  "visual_elements": [
+    "arrows for process flow",
+    "hand-drawn icons (files, folders, tech)",
+    "cross-hatching for shading",
+    "labeled diagrams",
+    "clear visual hierarchy"
+  ],
+  "lighting": "illustrative shading",
+  "typography_hints": "hand-drawn sans-serif",
+  "negative_characteristics": [
+    "photorealism",
+    "gradients",
+    "3D renders",
+    "glossy textures"
+  ]
+}

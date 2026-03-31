@@ -31,6 +31,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from PIL import Image
 from google import genai
 from google.genai import types
 
@@ -79,12 +80,36 @@ def get_api_key() -> str:
     return api_key
 
 
+def get_characters_dir() -> Path:
+    """Get the characters directory at project root."""
+    return Path.cwd() / "sample" / "characters"
+
+
+def load_character_images(character_name: str) -> list[Image.Image]:
+    """Load all images for a named character from sample/characters/{name}/."""
+    char_dir = get_characters_dir() / character_name
+    if not char_dir.exists():
+        available = [d.name for d in get_characters_dir().iterdir() if d.is_dir()] if get_characters_dir().exists() else []
+        raise FileNotFoundError(
+            f"Character '{character_name}' not found in {get_characters_dir()}. "
+            f"Available characters: {', '.join(available) or 'none'}"
+        )
+    img_paths = sorted(
+        p for p in char_dir.iterdir()
+        if p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp")
+    )
+    if not img_paths:
+        raise FileNotFoundError(f"No images found in {char_dir}")
+    return [Image.open(p) for p in img_paths]
+
+
 def generate_image(
     prompt: str,
     output_path: str,
     model: str = "gemini-2.5-flash-image",
     aspect_ratio: str | None = None,
     image_size: str | None = None,
+    characters: list[str] | None = None,
 ) -> str | None:
     """Generate an image from a text prompt.
 
@@ -94,11 +119,24 @@ def generate_image(
         model: Gemini model ID.
         aspect_ratio: Aspect ratio (e.g., "16:9", "1:1").
         image_size: Resolution ("1K", "2K", or "4K").
+        characters: List of character names to include as reference images.
 
     Returns:
         Text response from the model, if any.
     """
     client = genai.Client(api_key=get_api_key())
+
+    # Load character reference images
+    char_images: list[Image.Image] = []
+    if characters:
+        for char_name in characters:
+            char_images.extend(load_character_images(char_name))
+        char_names = ", ".join(characters)
+        prompt += (
+            f"\n\nIMPORTANT: The following reference images show the character(s) '{char_names}'. "
+            f"Use these as exact visual reference for how the character should look in the generated image. "
+            f"Preserve the character's visual identity (colors, shape, proportions) accurately."
+        )
 
     config_kwargs: dict = {"response_modalities": ["IMAGE"]}
 
@@ -110,9 +148,11 @@ def generate_image(
 
     config = types.GenerateContentConfig(**config_kwargs)
 
+    contents: list = [prompt] + char_images
+
     response = client.models.generate_content(
         model=model,
-        contents=[prompt],
+        contents=contents,
         config=config,
     )
 
@@ -188,6 +228,11 @@ def main():
         choices=list(PRESETS.keys()),
         help="Content preset (sets aspect ratio and resolution)",
     )
+    parser.add_argument(
+        "--character", "-c",
+        action="append",
+        help="Character name(s) to include as visual reference (from sample/characters/). Can be repeated.",
+    )
 
     args = parser.parse_args()
 
@@ -211,8 +256,11 @@ def main():
             model=model,
             aspect_ratio=aspect,
             image_size=size,
+            characters=args.character,
         )
         print(f"Image saved to: {output}")
+        if args.character:
+            print(f"Character references: {', '.join(args.character)}")
         if text:
             print(f"Model response: {text}")
     except Exception as e:
