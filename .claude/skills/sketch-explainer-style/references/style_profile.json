@@ -1,6 +1,6 @@
 {
   "style_name": "sketch-explainer",
-  "style_summary": "A hand-drawn, line-art illustration style with cross-hatching for shading, used for clear, diagrammatic explanations. The visual language is primarily monochromatic but can feature muted, watercolor-like color sections to organize information, with a focus on icons and flow.",
+  "style_summary": "A hand-drawn, line-art illustration style with cross-hatching for shading, used for clear, diagrammatic explanations. The visual language is primarily monochromatic but can feature muted, watercolor-like color sections to organize information, with a focus on icons and flow. CRITICAL: keep compositions minimal, uncluttered, and highly legible — use generous whitespace, one icon per concept, bold readable labels, and never duplicate section titles or labels. When in doubt, remove elements rather than add them.",
   "color_palette": {
     "dominant_colors": [
       "#000000",
@@ -19,8 +19,8 @@
   },
   "composition": {
     "layout": "diagrammatic",
-    "whitespace": "moderate",
-    "density": "balanced"
+    "whitespace": "generous",
+    "density": "sparse, minimal, uncluttered"
   },
   "mood": "informative",
   "rendering_style": "hand-drawn sketch with cross-hatching",
@@ -37,6 +37,25 @@
     "photorealism",
     "gradients",
     "3D renders",
-    "glossy textures"
+    "glossy textures",
+    "visual clutter",
+    "overlapping elements",
+    "duplicate or repeated labels",
+    "tiny illegible text",
+    "too many decorative icons"
+  ],
+  "simplification_rules": [
+    "Prioritize legibility over decoration",
+    "Use generous whitespace between elements",
+    "One icon per concept maximum",
+    "Labels must be large, bold, and read clearly on a phone screen",
+    "Never duplicate section titles or labels anywhere in the image",
+    "If in doubt, remove the element"
+  ],
+  "roadmap_path_rules": [
+    "Primary path must be a continuous S-shaped or serpentine curve that fills the full width AND height of the canvas, using the corners edge to edge",
+    "Stagger waypoint labels on alternating sides of the path (above / below, or left / right) to create visual rhythm and avoid crowding",
+    "Waypoint labels must be significantly larger than tier titles if tier titles are also present — the viewer should read the skill names first",
+    "Never render hex color codes, RGB values, or any style metadata as visible text in the image"
   ]
 }
